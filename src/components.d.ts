@@ -9,7 +9,9 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface StockPrice {}
+  interface StockPrice {
+    'stockSymbol': string;
+  }
 }
 
 declare global {
@@ -26,7 +28,9 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface StockPrice extends JSXBase.HTMLAttributes<HTMLStockPriceElement> {}
+  interface StockPrice extends JSXBase.HTMLAttributes<HTMLStockPriceElement> {
+    'stockSymbol'?: string;
+  }
 
   interface IntrinsicElements {
     'stock-price': StockPrice;

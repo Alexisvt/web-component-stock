@@ -1,4 +1,4 @@
-import { Component, Element, h, State } from '@stencil/core';
+import { Component, h, Prop, State } from '@stencil/core';
 
 import { AV_API_KEY } from '../../Global/global';
 
@@ -8,28 +8,22 @@ import { AV_API_KEY } from '../../Global/global';
   shadow: true,
 })
 export class StockPrice {
-  stockInput: HTMLInputElement;
-
   @State() fetchedPrice = 0;
   @State() stockUserInput: string;
   @State() stockInputValid = false;
   @State() error: string;
-  @Element() el: HTMLElement;
+  @Prop() stockSymbol: string;
 
   onUserInput = (event: Event) => {
     this.stockUserInput = (event.target as HTMLInputElement).value;
     this.stockInputValid = this.stockUserInput.trim() !== '' ? true : false;
   };
 
+  componentDidLoad() {
+
+  }
   onFetchStockPrice = (event: Event) => {
     event.preventDefault();
-    // query selected approach
-    // const stockSymbol = (this.el.shadowRoot.querySelector(
-    //   '.stock-form__symbol'
-    // ) as HTMLInputElement).value;
-
-    // ref approach
-    // const stockSymbol = this.stockInput.value;
 
     const stockSymbol = this.stockUserInput;
 
@@ -72,7 +66,6 @@ export class StockPrice {
         <input
           class="stock-form__symbol  stock-form__symbol--no-focus"
           type="text"
-          ref={el => (this.stockInput = el)}
           value={this.stockUserInput}
           onInput={this.onUserInput}
         />
